@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit a Booking {% endblock %}
+
+{% block body %}
+<!-- id,session,customerID,movieID -->
+<!-- movies.id, movies.name -->
+<!-- customers.id, customers.name-->
+
+<div class="main-container">
+    <h3 class="card-title">Edit Booking</h3>
+    <h5 class="card-subtitle mb-2 text-muted">Booking # {{ booking[0] }}</h5>  
+        <form method="POST" class="form-inline">
+        Session:<br> <input class="form-control" value={{ booking[1] }} type="text" name="session">
+        <hr>
+        <label for="customers">Customer:</label>
+        <select name="customer" id="customer">
+        {% for customer in customers %}
+            {% if customer[0] == booking[2] %}
+                <option value={{customer[0]}} selected>{{customer[1]}}</option>
+            {% else %}
+                <option value={{customer[0]}}>{{customer[1]}}</option>            
+            {% endif %}    
+        {% endfor %}
+        </select>
+        
+        <hr>
+        <label for="movies">Movie:</label>
+        <select name="movie" id="movie">      
+        {% for movie in movies %}
+            {% if movie[0] == booking[3] %}
+                <option value={{movie[0]}} selected>{{movie[1]}}</option>
+            {% else %}
+                <option value={{movie[0]}}>{{movie[1]}}</option>            
+            {% endif %}
+        {% endfor %}
+        </select>
+       <hr>
+       <button type="submit" class="btn btn-info" >Update</button>
+       <a type="button" class="btn btn-info" href="/bookings">Cancel</a>
+       <!--
+       <a type="button" class="btn btn-info" href="{{ url_for('display_booking', booking_id=booking[0]) }}">Cancel</a>
+       -->
+    </form>
+</div>
+
+
+{% endblock %}
+
